@@ -1,5 +1,5 @@
 import socket
-
+from server_algo import diffie_hellman
 
 #inital listen for conenction
 #decide on protocol to use 
@@ -22,7 +22,8 @@ def main():
         client_sock,addr = server_s.accept()
         client_sock.send(init_message.encode())
         data = client_sock.recv(2048).decode("ascii")
+        print(data)
         print ("Request for key exchange:{0}".format(data))
-
+        diffie_hellman(client_sock)
 if __name__ == "__main__":
     main()
