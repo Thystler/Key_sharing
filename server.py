@@ -1,10 +1,6 @@
 import socket
 from server_algo import diffie_hellman
 
-#inital listen for conenction
-#decide on protocol to use 
-#call the file with said function
-
 init_message = """
 Welcome to the key exchange server
 

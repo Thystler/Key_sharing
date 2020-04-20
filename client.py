@@ -1,9 +1,4 @@
-#start connection with server 
-#make selection 
-#call function
 from client_algo import diffie_hellman
-
-
 import socket
 
 
