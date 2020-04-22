@@ -1,7 +1,13 @@
-from client_algo import diffie_hellman
+from dh_client import diffie_hellman
 import socket
 
+end_msg = """
+------------------------------------------------------------------
+Key exchange achived.
 
+Key :{0}
+------------------------------------------------------------------
+"""
 
 def main():
     client_s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -11,7 +17,10 @@ def main():
     choice = input("Enter Input:")
     if (choice == 'dh'):
         client_s.send(choice.encode())
-        diffie_hellman(client_s)
+        sharedkey = diffie_hellman(client_s)
+        if sharedkey > 0:
+            print(end_msg.format(sharedkey))
+
 
     
 
