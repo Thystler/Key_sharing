@@ -49,20 +49,24 @@ def prime_generation():
 
 def diffie_hellman(client_sock):
 
-
+    #initates a diffiehellman exchange
     start = time.time()
     prime = prime_generation()
     print(time.time() - start)
     modulo_num = prime
-    base_num = random.randrange(prime - 1)
+    generator = random.randrange(prime - 1)
     server_sec = random.randrange(10000)
-    client_sock.send("{0},{1}".format(modulo_num,base_num).encode())
 
-    server_pub = (base_num ** server_sec) % modulo_num
+    #sends the modulo and base number with the client 
+    client_sock.send("{0},{1}".format(modulo_num,generator).encode())
+
+    server_pub = (generator ** server_sec) % modulo_num
     time.sleep(3)
+
+    #sends the server public key
     client_sock.send(str(server_pub).encode())
 
-
+    #recv the client public key
     client_pub = client_sock.recv(2048).decode("ascii")
     shared_sec = (int(client_pub) ** server_sec) % modulo_num
     return shared_sec
