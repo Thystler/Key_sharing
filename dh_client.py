@@ -6,11 +6,7 @@ def diffie_hellman(client_s):
     #recvieves the modulo and generator
     data = client_s.recv(4096).decode("ascii").split(',')
 
-
-
-
-
-    #rec
+    #recvs the servers public key
     server_pub = client_s.recv(2048).decode("ascii")
 
     modulo_num = int(data[0])
@@ -18,8 +14,10 @@ def diffie_hellman(client_s):
     client_sec = random.randrange(10000)
     client_pub = (base_num ** client_sec) % modulo_num
 
-
+    #sends the client public key
     client_s.send(str(client_pub).encode())
     shared_sec = (int(server_pub) ** client_sec) % modulo_num
+
+
     return shared_sec
 

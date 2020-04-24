@@ -1,4 +1,5 @@
 from dh_client import diffie_hellman
+from el_client import elgamal
 import socket
 
 end_msg = """
@@ -20,6 +21,8 @@ def main():
         sharedkey = diffie_hellman(client_s)
         if sharedkey > 0:
             print(end_msg.format(sharedkey))
+    elif (choice == 'el'):
+        client_s.send(choice.encode())
 
 
     
