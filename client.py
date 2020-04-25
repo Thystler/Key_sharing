@@ -1,5 +1,4 @@
-from dh_client import diffie_hellman
-from el_client import elgamal
+from kex_algo_client import diffie_hellman,elgamal
 import socket
 
 end_msg = """
@@ -23,6 +22,7 @@ def main():
             print(end_msg.format(sharedkey))
     elif (choice == 'el'):
         client_s.send(choice.encode())
+        sharedKey = elgamal(client_s)
 
 
     

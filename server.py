@@ -1,5 +1,5 @@
 import socket
-from dh_server import diffie_hellman
+from kex_algo_server import diffie_hellman,elgamal
 
 init_message = """
 Welcome to the key exchange server
@@ -27,8 +27,14 @@ def main():
         client_sock.send(init_message.encode())
         data = client_sock.recv(2048).decode("ascii")
         print ("Request for key exchange:{0}".format(data))
-        sharedkey = diffie_hellman(client_sock)
-        if sharedkey > 0:
-            print(end_msg.format(addr,sharedkey))
+        if (data == 'dh'):
+            sharedkey = diffie_hellman(client_sock)
+            if sharedkey > 0:
+                print(end_msg.format(addr,sharedkey))
+        elif(data == 'el'):
+            sharedkey = elgamal(client_sock)
+            
+            
+
 if __name__ == "__main__":
     main()

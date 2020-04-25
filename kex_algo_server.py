@@ -1,4 +1,4 @@
-from prime_gen import get_prime
+from prime_gen import get_prime,get_primitive_root
 import socket,random
 import time
 
@@ -28,3 +28,14 @@ def diffie_hellman(client_sock):
     shared_sec = (int(client_pub) ** server_sec) % modulo_num
     return shared_sec
     
+
+def elgamal(client_sock):
+    prime = get_prime(256)
+    generator = get_primitive_root(prime)
+    server_sec = random.randrange(10000)
+    h = (generator ** server_sec) % prime
+    client_sock.send("{0},{1},{2}".format(prime,generator,h).encode())
+    data = client_sock.recv(4096).decode("ascii").split(',')
+    print(data[0])
+    print(data[1])
+
