@@ -36,6 +36,7 @@ def elgamal(client_sock):
     h = (generator ** server_sec) % prime
     client_sock.send("{0},{1},{2}".format(prime,generator,h).encode())
     data = client_sock.recv(4096).decode("ascii").split(',')
-    print(data[0])
-    print(data[1])
+    s = pow(int(data[0]),server_sec,prime)
+    m = (int(data[1]) * pow(s,prime-2,prime)) % prime
+    return m
 

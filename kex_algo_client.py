@@ -27,9 +27,10 @@ def elgamal(client_s):
     prime = int(data[0])
     generator = int(data[1])
     h = int(data[2])
-    client_sec = random.randrange(prime)
+    client_sec = random.randrange(10000)
     s = (h ** client_sec) % prime
     c1 = (generator ** client_sec) % prime
-    shared_sec = random.randrange(prime)
+    shared_sec = random.randrange(1000)
     c2 = shared_sec * s
     client_s.send('{0},{1}'.format(c1,c2).encode())
+    return m
