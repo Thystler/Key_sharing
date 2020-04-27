@@ -26,13 +26,17 @@ def main():
         client_sock,addr = server_s.accept()
         client_sock.send(init_message.encode())
         data = client_sock.recv(2048).decode("ascii")
-        print ("Request for key exchange:{0}".format(data))
+        
         if (data == 'dh'):
+            print ("Request for key exchange: Diffie-Hellman")
             sharedkey = diffie_hellman(client_sock)
             if sharedkey > 0:
                 print(end_msg.format(addr,sharedkey))
         elif(data == 'el'):
+            print ("Request for key exchange: El-Gamal")
             sharedkey = elgamal(client_sock)
+            if sharedkey > 0:
+                print(end_msg.format(addr,sharedkey))
             
             
 

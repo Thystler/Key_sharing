@@ -22,7 +22,9 @@ def main():
             print(end_msg.format(sharedkey))
     elif (choice == 'el'):
         client_s.send(choice.encode())
-        sharedKey = elgamal(client_s)
+        sharedkey = elgamal(client_s)
+        if sharedkey > 0:
+            print(end_msg.format(sharedkey))
 
 
     

@@ -41,7 +41,6 @@ def miller_rabin(p):
 
 def get_prime(n):
     length = n
-    print(get_primitive_root(101))
     while True:
         x = random.getrandbits(length)
         if miller_rabin(x):
