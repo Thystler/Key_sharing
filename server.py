@@ -4,8 +4,8 @@ from kex_algo_server import diffie_hellman,elgamal
 init_message = """
 Welcome to the key exchange server
 
-1: DH
-2: ECDH
+1: DH - Diffie-hellman
+2: el - El-GAMAL
 
 Example input: "DH"
 """
